@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function getCombinations(coin, sum) {
+            let result = [];
+
+            // 재귀 함수를 이용한 조합 구하기
+            function combinate(tempArrSum, index, tempArr) {
+                if (tempArrSum === sum) { //탈출조건1
+                    console.log("tempArrSum === N", tempArrSum);
+                    result.push(tempArr);
+                    return;
+                }
+                if (tempArrSum > sum) { //탈출조건2
+                    console.log("tempArrSum > N", tempArrSum);
+                    return;
+                }
+                for (let i = index; i < coin.length; i++) {
+                    console.log("재귀 / tempArrSum+arr[i]", tempArrSum , coin[i]);
+                    console.log("재귀 / i", i);
+                    console.log("재귀 / [...tempArr, arr[i]]", [...tempArr, coin[i]]);
+                    combinate(tempArrSum + coin[i], i, [...tempArr, coin[i]]);
+                    //combinate(0+1 , 0 , [1]);
+                    //combinate(1+1 , 0 , [1,1]);
+                    //combinate(2+1 , 0 , [1,1,1]);
+                    //combinate(3+1 , 0 , [1,1,1,1]); -------->(0)
+                    //combinate(3+2 , 1 , [1,1,1,2]); 
+                    //combinate(3+3 , 2 , [1,1,1,3]);
+                    //combinate(2+2 , 1 , [1,1,2]); -------->(0)
+                    //combinate(2+3 , 2 , [1,1,3]);
+                    //combinate(1+2, 1,  [1,2]);
+                    //combinate(3+2 ,1, [1,2,2]);
+                    //combinate(3+3 ,2, [1,2,3]);
+                    //combinate(1+3 ,2, [1,3]); -------->(0)
+                    //combinate(0+2,1,[2]);
+                    //combinate(2+2 , 1, [2,2]);-------->(0)
+                    //combinate(2+3 , 2, [2,3]);
+                    //combinate(0+3, 2, [3]);
+                    //combinate(3+3, 2, [3,3]);
+                }
+            }
+
+            combinate(0, 0, []);
+            alert("coin :[ "+coin+" ], "+" sum: "+sum+" 인 경우의 수는 : "+result.length);
+            return result.length;
+        }
+        getCombinations([1,2,3],4);
+    </script>
+</body>
+</html>
